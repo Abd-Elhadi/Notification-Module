@@ -1,11 +1,6 @@
-/**
- * 
- */
 
-/**
- * @author PC
- *
- */
-public class SendNotification {
-
+interface SendNotification {
+	public void send(Notification notification);
+	public boolean isSent();
 }
+
