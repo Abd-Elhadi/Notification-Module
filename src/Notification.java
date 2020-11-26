@@ -13,8 +13,8 @@ public class Notification {
 	}
 	
 	@SuppressWarnings("unused")
-	private void createMessage() {
-		
+	public String createMessage(String name) {
+		return "";
 	}
 	
 	public String getSubject() {

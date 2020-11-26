@@ -3,8 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class NotificationManger {
-    Map<String,String> allTemplates=new HashMap<String,String>();
-    ArrayList<notification> allNotifications = new ArrayList<notification>;
+    ArrayList<Notification> allNotifications = new ArrayList<Notification>();
     static Statistics stat = new Statistics();
 
 
@@ -12,7 +11,13 @@ public class NotificationManger {
     }
 
     public void createNotification(String receiver , String name ,String templateType , String channel){
-
+        Notification notifi = new Notification();
+        String message = notifi.createMessage(name);
+        notifi.setChannel(channel);
+        notifi.setReceiver(receiver);
+        notifi.setSubject(templateType);
+        notifi.setMessage(message);
+        allNotifications.add(notifi);
     }
 
     public Statistics getStat(){
@@ -20,7 +25,8 @@ public class NotificationManger {
     }
 
 
-    public void sendAll(){
+    public void send(){
+
 
     }
 
