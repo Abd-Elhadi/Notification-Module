@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,13 +11,11 @@ public class NotificationManger {
     public NotificationManger() {
     }
 
-    public void createNotification(String receiver , String name ,String templateType , String channel){
-        Notification notifi = new Notification();
-        String message = notifi.createMessage(name);
-        notifi.setChannel(channel);
-        notifi.setReceiver(receiver);
-        notifi.setSubject(templateType);
-        notifi.setMessage(message);
+    public void createNotification(String receiver , String name ,String templateName , String channel) throws IOException{
+    	Template template = new Template();
+    	stat.checkReceiver(receiver);
+    	stat.checkTemplates(templateName);
+        Notification notifi = new Notification(receiver, name, templateName, template.getContent(templateName), channel);
         allNotifications.add(notifi);
     }
 
@@ -32,7 +31,7 @@ public class NotificationManger {
 
     public static void main(String[] args) {
 
-        }
+    }
 
 
 }

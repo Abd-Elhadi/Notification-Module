@@ -12,9 +12,25 @@ public class Notification {
 		receiver = "";
 	}
 	
-	@SuppressWarnings("unused")
-	public String createMessage(String name) {
-		return "";
+	Notification (String receiver, String name, String subject, String template, String channel){
+		this.receiver = receiver;
+		this.subject = subject;
+		this.channel = channel;
+		createMessage(name, template);
+	}
+	
+	public void createMessage(String name, String template) {
+		String [] splitTemp = template.split(" ");
+		String updatedTemplate = "";
+		for (int i = 0; i < splitTemp.length; i++) {
+			if (splitTemp[i].equals("%n")) {
+				splitTemp[i] = name;
+			}
+		}
+		for (int j = 0; j < splitTemp.length; j++) {
+			updatedTemplate += splitTemp[j] + " ";
+		}
+		this.message = updatedTemplate;
 	}
 	
 	public String getSubject() {
@@ -24,14 +40,9 @@ public class Notification {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	
 
 	public String getMessage() {
 		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 
 	public String getChannel() {
