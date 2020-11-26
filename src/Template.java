@@ -1,10 +1,9 @@
 import java.io.*;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Template {
     File templates = new File("templates.txt");
     FileWriter myWriter = new FileWriter("templates.txt");
-    String line = new String();
 
 
     public Template() throws IOException {
@@ -12,9 +11,19 @@ public class Template {
         myWriter.close();
     }
 
-
+    public ArrayList<String> getTypes() throws IOException {
+        String line;
+        ArrayList<String> types = new ArrayList<String>();
+        FileReader file = new FileReader("templates.txt");
+        BufferedReader br = new BufferedReader(file);
+        while ((line = br.readLine())!= null){
+            String[] data = line.split(" - ");
+            types.add(data[1]);
+        }
+        return types;
+    }
     public String getContent(String templateName) throws IOException {
-        String type,content,language;
+        String type,content,language,line;
         FileReader file = new FileReader("templates.txt");
         BufferedReader br = new BufferedReader(file);
         while ((line = br.readLine())!= null){
@@ -42,7 +51,7 @@ public class Template {
     public void removeTemplate(String templateName) throws IOException {
         File tempFile= new File("tempFile.txt");
         FileWriter tempWriter = new FileWriter("tempFile.txt");
-        String type,content,language;
+        String type,content,language,line;
         FileReader file = new FileReader("templates.txt");
         BufferedReader br = new BufferedReader(file);
         while ((line = br.readLine())!= null){
@@ -70,12 +79,4 @@ public class Template {
 
     }
 
-    public static void main(String[] args) throws IOException {
-        Template t= new Template();
-        t.addTemplate("English","what ? ","gppd");
-        t.addTemplate("arabic","gfref? ","وبحبايبكم اما الحب يا روحي عليه");
-        t.addTemplate("english","okat" , "gdfg g");
-        System.out.println(t.getContent("okat"));
-
-    }
 }
