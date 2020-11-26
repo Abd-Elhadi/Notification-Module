@@ -11,17 +11,6 @@ public class Template {
         myWriter.close();
     }
 
-    public ArrayList<String> getTypes() throws IOException {
-        String line;
-        ArrayList<String> types = new ArrayList<String>();
-        FileReader file = new FileReader("templates.txt");
-        BufferedReader br = new BufferedReader(file);
-        while ((line = br.readLine())!= null){
-            String[] data = line.split(" - ");
-            types.add(data[1]);
-        }
-        return types;
-    }
     public String getContent(String templateName) throws IOException {
         String type,content,language,line;
         FileReader file = new FileReader("templates.txt");
