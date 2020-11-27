@@ -9,7 +9,7 @@ public class SendSMS implements SendNotification{
 	/*
 	 * this will create a txt file with the recipient number
 	 * and the notification will be written in the txt file with the following format
-	 * The word *Subject* between the Asterisks followed by the notification and a new line.
+	 * The word *Subject* between the Asterisks followed by the notification in a new line and a new line to separete the notification from the next one.
 	 * 
 	 */
 	public void send(Notification notification) {
