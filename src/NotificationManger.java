@@ -25,7 +25,20 @@ public class NotificationManger {
 
 
     public void send(){
-
+    	SendNotification sender;
+    	for (int i = 0; i < allNotifications.size(); i++) {
+    		if (allNotifications.get(i).getChannel().equalsIgnoreCase("email")) {
+    			sender = new SendEmail();
+    		} else {
+    			sender = new SendSMS();
+    		}
+    		sender.send(allNotifications.get(i));
+    		if (sender.isSent()) {
+    			stat.incrementSent();
+    		} else {
+    			stat.incrementFailed();
+    		}
+    	}
 
     }
 

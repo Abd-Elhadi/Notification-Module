@@ -12,47 +12,45 @@ public class SendEmail implements SendNotification{
 	boolean check = false;
 	@Override
 	public void send(Notification notification) {
-		if (notification.channel.equalsIgnoreCase("email")) {
-			/*
-			 * Properties is a key value store. We'll use is to store:
-			 * - Host server
-			 * - Authentication, we'll use Gmail server to send the email so it's gonna be 'true'
-			 * - Port number
-			 * - Encryption method, for Gmail it'll be 'true'
-			 */
-			Properties properties = new Properties();    
-			properties.put("mail.smtp.host", "smtp.gmail.com");    
-			properties.put("mail.smtp.auth", "true");    
-			properties.put("mail.smtp.port", "587");    
-			properties.put("mail.smtp.starttls.enable", "true");
+		/*
+		 * Properties is a key value store. We'll use is to store:
+		 * - Host server
+		 * - Authentication, we'll use Gmail server to send the email so it's gonna be 'true'
+		 * - Port number
+		 * - Encryption method, for Gmail it'll be 'true'
+		 */
+		Properties properties = new Properties();    
+		properties.put("mail.smtp.host", "smtp.gmail.com");    
+		properties.put("mail.smtp.auth", "true");    
+		properties.put("mail.smtp.port", "587");    
+		properties.put("mail.smtp.starttls.enable", "true");
 
-			//Sender credentials
-			String email = "notifications.system.module@gmail.com";
-			String password = "notsys2020";
+		//Sender credentials
+		String email = "notifications.system.module@gmail.com";
+		String password = "notsys2020";
 
-			//get Session   
-			Session session = Session.getDefaultInstance(properties,    
-					new javax.mail.Authenticator() {    
-				protected PasswordAuthentication getPasswordAuthentication() {    
-					return new PasswordAuthentication(email, password);  
-				}    
-			});    
-			//compose message    
-			Message msg = null;
-			try {
-				msg = prepareMessage(session, notification.receiver, notification);
-			} catch (AddressException e) {
-				e.printStackTrace();
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			}  
-			try {
-				Transport.send(msg);
-				System.out.println("Notification sent successfully");
-				check = true;
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			}
+		//get Session   
+		Session session = Session.getDefaultInstance(properties,    
+				new javax.mail.Authenticator() {    
+			protected PasswordAuthentication getPasswordAuthentication() {    
+				return new PasswordAuthentication(email, password);  
+			}    
+		});    
+		//compose message    
+		Message msg = null;
+		try {
+			msg = prepareMessage(session, notification.receiver, notification);
+		} catch (AddressException e) {
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}  
+		try {
+			Transport.send(msg);
+			System.out.println("Notification sent successfully");
+			check = true;
+		} catch (MessagingException e) {
+			e.printStackTrace();
 		}
 	}
 
