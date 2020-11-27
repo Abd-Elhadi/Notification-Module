@@ -15,7 +15,7 @@ public class Statistics {
 		failedNotifications = 0;
 	}
 	
-	public void checkReceiver(String receiver) {
+	public void checkTopReceiver(String receiver) {
 		if (allReceivers.containsKey(receiver)) {
 			allReceivers.put(receiver, allReceivers.get(receiver) + 1);
 			if (topReceiver.equals("")) {
@@ -31,7 +31,7 @@ public class Statistics {
 			allReceivers.put(receiver, 1);
 		}
 	}
-	public void checkTemplates(String templateName) {
+	public void checkTopTemplate(String templateName) {
 		if (allTemplates.containsKey(templateName)) {
 			allTemplates.put(templateName, allReceivers.get(templateName) + 1);
 			if (topTemplate.equals("")) {

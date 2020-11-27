@@ -11,12 +11,17 @@ public class NotificationManger {
     public NotificationManger() {
     }
 
-    public void createNotification(String receiver , String name ,String templateName , String channel) throws IOException{
+    public void createNotification(String receiver, String name, String templateName, String placeholder1, String placeholder2 , String channel) throws IOException{
     	Template template = new Template();
-    	stat.checkReceiver(receiver);
-    	stat.checkTemplates(templateName);
-        Notification notifi = new Notification(receiver, name, templateName, template.getContent(templateName), channel);
-        allNotifications.add(notifi);
+    	String content = template.getContent(templateName);
+    	if (!content.equals("NOT FOUND")) {
+    	   	stat.checkTopReceiver(receiver);
+        	stat.checkTopTemplate(templateName);
+            Notification notifi = new Notification(receiver, name, placeholder1, placeholder2, templateName, content, channel);
+            allNotifications.add(notifi);
+    	} else {
+    		System.out.println("Invalid Template Type");
+    	}
     }
 
     public Statistics getStat(){
@@ -42,8 +47,10 @@ public class NotificationManger {
 
     }
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws IOException{
+    	NotificationManger m = new NotificationManger();
+    	m.createNotification("farabi.marwa@gmail.com", "marwa", "OrderShipped", "12345", "Amazon", "email");
+    	m.send();
     }
 
 
